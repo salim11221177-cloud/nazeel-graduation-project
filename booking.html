@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>حجز الفندق</title>
+    <title>حجز الفندق | نزيل</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -22,52 +22,71 @@
 
     <header>
         <h1>حجز الفندق</h1>
-        <p>أدخل بيانات الحجز</p>
+        <p>أدخل بياناتك لإتمام الحجز</p>
     </header>
 
     <main>
 
         <section>
+
             <h2>بيانات الحجز</h2>
 
-            <form>
+            <form id="bookingForm">
+
+                <label for="fullName">الاسم الكامل</label>
 
                 <input
                     type="text"
-                    placeholder="الاسم الكامل"
+                    id="fullName"
+                    name="fullName"
+                    placeholder="أدخل الاسم الكامل"
                     required
                 >
+
+                <label for="phone">رقم الهاتف</label>
 
                 <input
                     type="tel"
-                    placeholder="رقم الهاتف"
+                    id="phone"
+                    name="phone"
+                    placeholder="أدخل رقم الهاتف"
                     required
                 >
+
+                <label for="email">البريد الإلكتروني</label>
 
                 <input
                     type="email"
-                    placeholder="البريد الإلكتروني"
+                    id="email"
+                    name="email"
+                    placeholder="example@email.com"
                     required
                 >
 
-                <label>تاريخ الوصول</label>
+                <label for="checkIn">تاريخ الوصول</label>
 
                 <input
                     type="date"
+                    id="checkIn"
+                    name="checkIn"
                     required
                 >
 
-                <label>تاريخ المغادرة</label>
+                <label for="checkOut">تاريخ المغادرة</label>
 
                 <input
                     type="date"
+                    id="checkOut"
+                    name="checkOut"
                     required
                 >
 
-                <label>عدد الأشخاص</label>
+                <label for="guests">عدد الأشخاص</label>
 
                 <input
                     type="number"
+                    id="guests"
+                    name="guests"
                     min="1"
                     value="1"
                     required
@@ -78,6 +97,9 @@
                 </button>
 
             </form>
+
+            <div id="bookingResult"></div>
+
         </section>
 
     </main>
