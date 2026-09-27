@@ -1,6 +1,8 @@
-
 const bookingForm = document.getElementById("bookingForm");
 const bookingResult = document.getElementById("bookingResult");
+
+const hotelInput = document.getElementById("hotel");
+const roomInput = document.getElementById("room");
 
 const checkInInput = document.getElementById("checkIn");
 const checkOutInput = document.getElementById("checkOut");
@@ -11,7 +13,7 @@ checkInInput.min = today;
 checkOutInput.min = today;
 
 
-// عند تغيير تاريخ الوصول
+// تغيير تاريخ الوصول
 checkInInput.addEventListener("change", function () {
 
     checkOutInput.min = checkInInput.value;
@@ -26,10 +28,15 @@ checkInInput.addEventListener("change", function () {
 });
 
 
-// عند إرسال نموذج الحجز
+// إرسال الحجز
 bookingForm.addEventListener("submit", function (event) {
 
     event.preventDefault();
+
+
+    const hotel = hotelInput.value;
+
+    const room = roomInput.value;
 
     const fullName =
         document.getElementById("fullName").value.trim();
@@ -52,6 +59,8 @@ bookingForm.addEventListener("submit", function (event) {
 
     // التحقق من البيانات
     if (
+        !hotel ||
+        !room ||
         !fullName ||
         !phone ||
         !email ||
@@ -61,7 +70,7 @@ bookingForm.addEventListener("submit", function (event) {
     ) {
 
         showMessage(
-            "يرجى تعبئة جميع البيانات.",
+            "يرجى تعبئة جميع بيانات الحجز.",
             "error"
         );
 
@@ -69,7 +78,7 @@ bookingForm.addEventListener("submit", function (event) {
     }
 
 
-    // التحقق من التواريخ
+    // التحقق من التاريخ
     if (checkOut <= checkIn) {
 
         showMessage(
@@ -81,16 +90,20 @@ bookingForm.addEventListener("submit", function (event) {
     }
 
 
-    // إنشاء رقم الحجز
+    // إنشاء رقم حجز
     const bookingNumber =
         "NZL-" +
         Date.now().toString().slice(-8);
 
 
-    // بيانات الحجز
+    // إنشاء بيانات الحجز
     const booking = {
 
         bookingNumber: bookingNumber,
+
+        hotel: hotel,
+
+        room: room,
 
         fullName: fullName,
 
@@ -107,6 +120,7 @@ bookingForm.addEventListener("submit", function (event) {
         createdAt: new Date().toISOString(),
 
         status: "مؤكد"
+
     };
 
 
@@ -117,7 +131,7 @@ bookingForm.addEventListener("submit", function (event) {
         ) || [];
 
 
-    // إضافة الحجز
+    // إضافة الحجز الجديد
     existingBookings.push(booking);
 
 
@@ -128,7 +142,7 @@ bookingForm.addEventListener("submit", function (event) {
     );
 
 
-    // عرض رسالة النجاح
+    // عرض نتيجة الحجز
     bookingResult.innerHTML = `
 
         <div class="booking-success">
@@ -140,6 +154,16 @@ bookingForm.addEventListener("submit", function (event) {
             <p>
                 رقم الحجز:
                 <strong>${bookingNumber}</strong>
+            </p>
+
+            <p>
+                الفندق:
+                <strong>${hotel}</strong>
+            </p>
+
+            <p>
+                الغرفة:
+                <strong>${room}</strong>
             </p>
 
             <p>
@@ -172,11 +196,11 @@ bookingForm.addEventListener("submit", function (event) {
     `;
 
 
-    // تفريغ النموذج
+    // تنظيف النموذج
     bookingForm.reset();
 
 
-    // إعادة ضبط التواريخ
+    // إعادة إعداد التواريخ
     checkInInput.min = today;
 
     checkOutInput.min = today;
