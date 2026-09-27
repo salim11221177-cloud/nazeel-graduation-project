@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -33,6 +34,29 @@
 
             <form id="bookingForm">
 
+                <!-- اختيار الفندق -->
+                <label for="hotel">اختيار الفندق</label>
+
+                <select id="hotel" name="hotel" required>
+                    <option value="">اختر الفندق</option>
+                    <option value="فندق نزيل">فندق نزيل</option>
+                    <option value="فندق المكلا">فندق المكلا</option>
+                    <option value="فندق حضرموت">فندق حضرموت</option>
+                </select>
+
+
+                <!-- اختيار الغرفة -->
+                <label for="room">نوع الغرفة</label>
+
+                <select id="room" name="room" required>
+                    <option value="">اختر نوع الغرفة</option>
+                    <option value="غرفة مفردة">غرفة مفردة</option>
+                    <option value="غرفة مزدوجة">غرفة مزدوجة</option>
+                    <option value="جناح">جناح</option>
+                </select>
+
+
+                <!-- اسم العميل -->
                 <label for="fullName">الاسم الكامل</label>
 
                 <input
@@ -43,6 +67,8 @@
                     required
                 >
 
+
+                <!-- رقم الهاتف -->
                 <label for="phone">رقم الهاتف</label>
 
                 <input
@@ -53,6 +79,8 @@
                     required
                 >
 
+
+                <!-- البريد الإلكتروني -->
                 <label for="email">البريد الإلكتروني</label>
 
                 <input
@@ -63,6 +91,8 @@
                     required
                 >
 
+
+                <!-- تاريخ الوصول -->
                 <label for="checkIn">تاريخ الوصول</label>
 
                 <input
@@ -72,6 +102,8 @@
                     required
                 >
 
+
+                <!-- تاريخ المغادرة -->
                 <label for="checkOut">تاريخ المغادرة</label>
 
                 <input
@@ -81,6 +113,8 @@
                     required
                 >
 
+
+                <!-- عدد الأشخاص -->
                 <label for="guests">عدد الأشخاص</label>
 
                 <input
@@ -92,21 +126,29 @@
                     required
                 >
 
+
+                <!-- زر الحجز -->
                 <button type="submit">
                     تأكيد الحجز
                 </button>
 
             </form>
 
+
+            <!-- نتيجة الحجز -->
             <div id="bookingResult"></div>
 
         </section>
 
     </main>
 
+
     <footer>
-        <p>الحجز الإلكتروني والخدمات الفندقية والسياحية</p>
+        <p>
+            الحجز الإلكتروني والخدمات الفندقية والسياحية
+        </p>
     </footer>
+
 
     <script src="booking.js"></script>
 
