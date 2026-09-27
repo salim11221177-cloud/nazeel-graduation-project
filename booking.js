@@ -1,156 +1,201 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+const bookingForm = document.getElementById("bookingForm");
+const bookingResult = document.getElementById("bookingResult");
 
-    <title>حجز الفندق | نزيل</title>
+const checkInInput = document.getElementById("checkIn");
+const checkOutInput = document.getElementById("checkOut");
 
-    <link rel="stylesheet" href="style.css">
-</head>
+const today = new Date().toISOString().split("T")[0];
 
-<body>
-
-    <nav>
-        <a href="index.html">الرئيسية</a>
-        <a href="hotels.html">الفنادق</a>
-        <a href="booking.html">الحجز</a>
-        <a href="login.html">تسجيل الدخول</a>
-        <a href="register.html">إنشاء حساب</a>
-    </nav>
-
-    <header>
-        <h1>حجز الفندق</h1>
-        <p>أدخل بياناتك لإتمام الحجز</p>
-    </header>
-
-    <main>
-
-        <section>
-
-            <h2>بيانات الحجز</h2>
-
-            <form id="bookingForm">
-
-                <!-- اختيار الفندق -->
-                <label for="hotel">اختيار الفندق</label>
-
-                <select id="hotel" name="hotel" required>
-                    <option value="">اختر الفندق</option>
-                    <option value="فندق نزيل">فندق نزيل</option>
-                    <option value="فندق المكلا">فندق المكلا</option>
-                    <option value="فندق حضرموت">فندق حضرموت</option>
-                </select>
+checkInInput.min = today;
+checkOutInput.min = today;
 
 
-                <!-- اختيار الغرفة -->
-                <label for="room">نوع الغرفة</label>
+// عند تغيير تاريخ الوصول
+checkInInput.addEventListener("change", function () {
 
-                <select id="room" name="room" required>
-                    <option value="">اختر نوع الغرفة</option>
-                    <option value="غرفة مفردة">غرفة مفردة</option>
-                    <option value="غرفة مزدوجة">غرفة مزدوجة</option>
-                    <option value="جناح">جناح</option>
-                </select>
+    checkOutInput.min = checkInInput.value;
 
+    if (
+        checkOutInput.value &&
+        checkOutInput.value <= checkInInput.value
+    ) {
+        checkOutInput.value = "";
+    }
 
-                <!-- اسم العميل -->
-                <label for="fullName">الاسم الكامل</label>
-
-                <input
-                    type="text"
-                    id="fullName"
-                    name="fullName"
-                    placeholder="أدخل الاسم الكامل"
-                    required
-                >
+});
 
 
-                <!-- رقم الهاتف -->
-                <label for="phone">رقم الهاتف</label>
+// عند إرسال نموذج الحجز
+bookingForm.addEventListener("submit", function (event) {
 
-                <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    placeholder="أدخل رقم الهاتف"
-                    required
-                >
+    event.preventDefault();
 
+    const fullName =
+        document.getElementById("fullName").value.trim();
 
-                <!-- البريد الإلكتروني -->
-                <label for="email">البريد الإلكتروني</label>
+    const phone =
+        document.getElementById("phone").value.trim();
 
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="example@email.com"
-                    required
-                >
+    const email =
+        document.getElementById("email").value.trim();
 
+    const checkIn =
+        checkInInput.value;
 
-                <!-- تاريخ الوصول -->
-                <label for="checkIn">تاريخ الوصول</label>
+    const checkOut =
+        checkOutInput.value;
 
-                <input
-                    type="date"
-                    id="checkIn"
-                    name="checkIn"
-                    required
-                >
+    const guests =
+        document.getElementById("guests").value;
 
 
-                <!-- تاريخ المغادرة -->
-                <label for="checkOut">تاريخ المغادرة</label>
+    // التحقق من البيانات
+    if (
+        !fullName ||
+        !phone ||
+        !email ||
+        !checkIn ||
+        !checkOut ||
+        !guests
+    ) {
 
-                <input
-                    type="date"
-                    id="checkOut"
-                    name="checkOut"
-                    required
-                >
+        showMessage(
+            "يرجى تعبئة جميع البيانات.",
+            "error"
+        );
 
-
-                <!-- عدد الأشخاص -->
-                <label for="guests">عدد الأشخاص</label>
-
-                <input
-                    type="number"
-                    id="guests"
-                    name="guests"
-                    min="1"
-                    value="1"
-                    required
-                >
+        return;
+    }
 
 
-                <!-- زر الحجز -->
-                <button type="submit">
-                    تأكيد الحجز
-                </button>
+    // التحقق من التواريخ
+    if (checkOut <= checkIn) {
 
-            </form>
+        showMessage(
+            "تاريخ المغادرة يجب أن يكون بعد تاريخ الوصول.",
+            "error"
+        );
 
-
-            <!-- نتيجة الحجز -->
-            <div id="bookingResult"></div>
-
-        </section>
-
-    </main>
+        return;
+    }
 
 
-    <footer>
-        <p>
-            الحجز الإلكتروني والخدمات الفندقية والسياحية
-        </p>
-    </footer>
+    // إنشاء رقم الحجز
+    const bookingNumber =
+        "NZL-" +
+        Date.now().toString().slice(-8);
 
 
-    <script src="booking.js"></script>
+    // بيانات الحجز
+    const booking = {
 
-</body>
+        bookingNumber: bookingNumber,
 
-</html>
+        fullName: fullName,
+
+        phone: phone,
+
+        email: email,
+
+        checkIn: checkIn,
+
+        checkOut: checkOut,
+
+        guests: Number(guests),
+
+        createdAt: new Date().toISOString(),
+
+        status: "مؤكد"
+    };
+
+
+    // قراءة الحجوزات السابقة
+    const existingBookings =
+        JSON.parse(
+            localStorage.getItem("nazeelBookings")
+        ) || [];
+
+
+    // إضافة الحجز
+    existingBookings.push(booking);
+
+
+    // حفظ الحجز
+    localStorage.setItem(
+        "nazeelBookings",
+        JSON.stringify(existingBookings)
+    );
+
+
+    // عرض رسالة النجاح
+    bookingResult.innerHTML = `
+
+        <div class="booking-success">
+
+            <h3>
+                تم تأكيد الحجز بنجاح ✅
+            </h3>
+
+            <p>
+                رقم الحجز:
+                <strong>${bookingNumber}</strong>
+            </p>
+
+            <p>
+                العميل:
+                <strong>${fullName}</strong>
+            </p>
+
+            <p>
+                تاريخ الوصول:
+                <strong>${checkIn}</strong>
+            </p>
+
+            <p>
+                تاريخ المغادرة:
+                <strong>${checkOut}</strong>
+            </p>
+
+            <p>
+                عدد الأشخاص:
+                <strong>${guests}</strong>
+            </p>
+
+            <p>
+                حالة الحجز:
+                <strong>مؤكد</strong>
+            </p>
+
+        </div>
+
+    `;
+
+
+    // تفريغ النموذج
+    bookingForm.reset();
+
+
+    // إعادة ضبط التواريخ
+    checkInInput.min = today;
+
+    checkOutInput.min = today;
+
+});
+
+
+function showMessage(message, type) {
+
+    bookingResult.innerHTML = `
+
+        <div class="booking-${type}">
+
+            <p>
+                ${message}
+            </p>
+
+        </div>
+
+    `;
+
+}
