@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>حجز الفندق</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>حجز الفندق</h1>
+        <p>أدخل بيانات الحجز</p>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>بيانات الحجز</h2>
+
+            <form>
+
+                <input
+                    type="text"
+                    placeholder="الاسم الكامل"
+                    required
+                >
+
+                <input
+                    type="tel"
+                    placeholder="رقم الهاتف"
+                    required
+                >
+
+                <input
+                    type="email"
+                    placeholder="البريد الإلكتروني"
+                    required
+                >
+
+                <label>تاريخ الوصول</label>
+                <input type="date" required>
+
+                <label>تاريخ المغادرة</label>
+                <input type="date" required>
+
+                <label>عدد الأشخاص</label>
+                <input
+                    type="number"
+                    min="1"
+                    value="1"
+                    required
+                >
+
+                <button type="submit">
+                    تأكيد الحجز
+                </button>
+
+            </form>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>الحجز الإلكتروني والخدمات الفندقية والسياحية</p>
+    </footer>
+
+</body>
+
+</html>
