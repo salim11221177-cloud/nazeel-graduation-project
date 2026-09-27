@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -12,9 +13,21 @@
 
 <body>
 
+    <nav>
+        <a href="index.html">الرئيسية</a>
+        <a href="hotels.html">الفنادق</a>
+        <a href="booking.html">الحجز</a>
+        <a href="login.html">تسجيل الدخول</a>
+        <a href="register.html">إنشاء حساب</a>
+    </nav>
+
     <header>
         <h1>الحجز الإلكتروني والخدمات الفندقية والسياحية</h1>
-        <p>مرحبًا بك في منصة الحجز والخدمات السياحية</p>
+
+        <p>
+            منصتك الإلكترونية للبحث عن الفنادق
+            وحجز الغرف والاستفادة من الخدمات السياحية
+        </p>
     </header>
 
     <main>
@@ -23,35 +36,77 @@
             <h2>ابحث عن فندق</h2>
 
             <form>
+
                 <input
                     type="text"
-                    placeholder="اسم الفندق أو المدينة"
+                    placeholder="اكتب اسم الفندق أو المدينة"
+                    required
                 >
 
-                <input type="date">
+                <label>تاريخ الوصول</label>
 
-                <input type="date">
+                <input
+                    type="date"
+                    required
+                >
 
-                <button type="submit">بحث</button>
+                <label>تاريخ المغادرة</label>
+
+                <input
+                    type="date"
+                    required
+                >
+
+                <button type="submit">
+                    بحث عن الفنادق
+                </button>
+
             </form>
         </section>
 
+
         <section>
-            <h2>الخدمات</h2>
+            <h2>خدماتنا</h2>
 
             <ul>
-                <li>حجز الفنادق</li>
-                <li>حجز الغرف</li>
+                <li>البحث عن الفنادق</li>
+                <li>حجز الغرف إلكترونيًا</li>
+                <li>الخدمات الفندقية</li>
                 <li>الخدمات السياحية</li>
                 <li>إدارة الحجوزات</li>
+                <li>التواصل مع الفنادق</li>
             </ul>
+        </section>
+
+
+        <section>
+
+            <h2>اكتشف الفنادق</h2>
+
+            <p>
+                تعرف على الفنادق المتاحة
+                واختر الفندق والغرفة المناسبة لك.
+            </p>
+
+            <a href="hotels.html">
+                <button type="button">
+                    عرض الفنادق
+                </button>
+            </a>
+
         </section>
 
     </main>
 
+
     <footer>
-        <p>مشروع تخرج - نظام الحجز الإلكتروني</p>
+
+        <p>
+            © 2026 الحجز الإلكتروني والخدمات الفندقية والسياحية
+        </p>
+
     </footer>
+
 
     <script src="script.js"></script>
 
